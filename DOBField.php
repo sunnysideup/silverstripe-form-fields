@@ -47,7 +47,7 @@ class DOBField extends CalendarDateField {
 		$tabIndex1 = $this->getTabIndexHTML(1);
 		$tabIndex2 = $this->getTabIndexHTML(2);
 
-		Requirements::javascript("formextensions/javascript/DOBField.js");
+		Requirements::javascript("formfieldsextra/javascript/DOBField.js");
 		return <<<HTML
 			<div class="dobfield">
 				<span class="littleDOBLabel">day: </span><input type="text" id="$id-day" class="day numeric" name="{$fieldName}[Day]" value="$day" maxlength="2"$tabIndex0 />
