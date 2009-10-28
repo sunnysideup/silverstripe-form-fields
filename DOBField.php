@@ -1,9 +1,9 @@
 <?php
-/**
- * CreditCard field, contains validation and formspec for creditcard fields.
- * @package forms
- * @subpackage fields-formattedinput
- */
+/*
+ *@author nicolaas[at]sunnysidep.co.nz
+ *
+ **/
+
 class DOBField extends CalendarDateField {
 
 	protected $minimumAgeInYears = 5;
@@ -16,7 +16,7 @@ class DOBField extends CalendarDateField {
 	protected static $too_young_error = "Sorry, you are too young.";
 		static function set_too_young_error ($v) {self::$too_young_error  = $v;}
 
-	protected static $too_old_error = "Sorry, you are too old";
+	protected static $too_old_error = "Sorry, you are too old.";
 		static function set_too_old_error ($v) {self::$too_old_error  = $v;}
 
 	function setValue( $value ) {

@@ -1,7 +1,13 @@
 <?php
 
+/*
+ *@author Romain[at]sunnysidep.co.nz
+ *
+ **/
+
+
 class RatingField extends OptionsetField {
-	
+
 	function __construct($name, $title = "", $source = array(), $value = "", $form = null) {
 		parent::__construct($name, $title, $source, $value, $form);
 		Requirements::javascript('survey/javascript/jquery/jquery-1.3.2.js');
@@ -12,7 +18,7 @@ class RatingField extends OptionsetField {
 		Requirements::css('survey/css/ui.slider.css');
 		Requirements::css('survey/css/ui.theme.css');
 	}
-	
+
 }
 
 ?>

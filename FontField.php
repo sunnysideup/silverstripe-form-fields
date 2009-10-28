@@ -1,7 +1,13 @@
 <?php
 
+/*
+ *@author Romain[at]sunnysidep.co.nz
+ *
+ **/
+
+
 class FontField extends DropdownField {
-	
+
 	static $font_families = array(
 		'Arial',
 		'Courier',
@@ -12,7 +18,7 @@ class FontField extends DropdownField {
 		'Times New Roman',
 		'Verdana'
 	);
-	
+
 	static $generic_families = array(
 		'Cursive',
 		'Fantasy',
@@ -20,7 +26,7 @@ class FontField extends DropdownField {
 		'Sans-serif',
 		'Serif'
 	);
-	
+
 	function __construct($name, $title = null, $value = '') {
 		foreach(self::$font_families as $fontFamily) {
 			foreach(self::$generic_families as $genericFamily) {
