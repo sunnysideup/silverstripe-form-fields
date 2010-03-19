@@ -46,7 +46,7 @@ Behaviour.register({
 						errorString += error[i];
 					}
 				}
-				errorString = "There was an error with your Password, please not its requirements: " + errorString + ".";
+				errorString = "There was an error with your Password, please note its requirements: " + errorString + ".";
 				validationError(el, errorString,"validation");
 				return false;
 			}
@@ -69,7 +69,7 @@ JS;
 
 	/** PHP Validation **/
 	function validate($validator){
-		$string = $this->cleanInput($this->value);
+		$string = $this->value;
 		$validator = new NZGovtPasswordValidator();
 		$member = Member::currentMember();
 		if(!$member){
@@ -83,7 +83,7 @@ JS;
 		else {
  			$validator->validationError(
  				$this->name,
-				"There is a problem with your Snapper Number: ".implode(", and ", $error).".",
+				"There is a problem with your password: it needs to contain at least seven characters including at least one uppercase, lowercase, digit and one punctuation character (e.g. Hu#9iowD is a valid password and Abababaa is not).",
 				"validation"
 			);
 			return false;
