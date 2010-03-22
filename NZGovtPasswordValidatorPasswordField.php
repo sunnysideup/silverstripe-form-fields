@@ -29,24 +29,27 @@ Behaviour.register({
 				validationError(el, errorString,"validation");
 				return false;
 			}
-			if (string.length > 6)                    {test1 = true;} else {error[1] = "it should have at least seven characters";}
-			if (string.match(/[a-z]/))                {test2 = true;} else {error[2] = "it should have at least one lowercase letter (e.g. h, j, or u)";}
-			if (string.match(/[A-Z]/))                {test3 = true;} else {error[3] = "it should have at least one uppercase letter (e.g. H, J or U)";}
-			if (string.match(/\d+/))                  {test4 = true;} else {error[4] = "it should have at least one digit (e.g. 1, 2, 3 or 4)";}
-			if (p.match(/.[!,@,#,$,%,^,&,*,?,_,~]/))  {test5 = true;} else {error[5] = "it should have at least one punctuation character (e.g. ~, @, #, or $)";}
+			if (string.length > 6)                    {test1 = true;} else {error[1] = "seven characters";}
+			if (string.match(/[a-z]/))                {test2 = true;} else {error[2] = "one lowercase letter (e.g. h, j, or u)";}
+			if (string.match(/[A-Z]/))                {test3 = true;} else {error[3] = "one uppercase letter (e.g. H, J or U)";}
+			if (string.match(/\d+/))                  {test4 = true;} else {error[4] = "one digit (e.g. 1, 2, 3 or 4)";}
+			if (string.match(/.[!,@,#,$,%,^,&,*,?,_,~]/))  {test5 = true;} else {error[5] = "one punctuation character (e.g. ~, @, #, or $)";}
 			if(test1 && test2 && test3 && test4 && test5) {
 				return true;
 			}
 			else {
 				for(var i = 0; i < error.length; i++) {
-					if(errorString.length > 0 && error[i]) {
-						errorString += ", and ";
+					if(errorString.length > 0 && error[i] && i > 0) {
+						errorString += ", ";
+					}
+					if(i + 1 == error.length) {
+						errorString += " and "
 					}
 					if(error[i]) {
 						errorString += error[i];
 					}
 				}
-				errorString = "There was an error with your Password, please note its requirements: " + errorString + ".";
+				errorString = "There was an error with your Password. It should have at least " + errorString + ".";
 				validationError(el, errorString,"validation");
 				return false;
 			}

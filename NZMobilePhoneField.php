@@ -5,7 +5,7 @@
  * @package forms
  * @subpackage fields-formattedinput
  */
-class NZMobilePhoneField extends PasswordField {
+class NZMobilePhoneField extends TextField {
 
 
 	function jsValidation() {
@@ -17,10 +17,14 @@ Behaviour.register({
 			var string = '';
 			var test1 = false;
 			var test2 = false;
+			var test3 = false;
 			var error = new Array;
 			var errorString = '';
 			el = _CURRENT_FORM.elements[fieldName];
 			string = el.value;
+			if(!el || !el.value) {
+				return true;
+			}
 			string = string.replace("+64", "");
 			string = string.replace("+", "");
 			string = string.replace(/[^0-9]/g, ''); //remove all non-digit characters
@@ -30,7 +34,8 @@ Behaviour.register({
 				return false;
 			}
 			if (string.length > 8)                    {test1 = true;} else {error[1] = "the number appears too short";}
-			if (string.length < 12)                   {test1 = true;} else {error[1] = "the number appears too long";}
+			if (string.length < 12)                   {test2 = true;} else {error[2] = "the number appears too long";}
+			if (string[0] + string[1] == "02")        {test3 = true;} else {error[3] = "your number should start with 02";}
 			if(test1 && test2) {
 				return true;
 			}
@@ -68,7 +73,12 @@ JS;
 	function validate($validator){
 		$ok = false;
 		$string = $this->cleanInput($this->value);
-		if(strlen($string) > 7 && strlen($string) < 11) {
+		if(!trim($string)) {
+			return true;
+		}
+		$length = strlen($string);
+		$firstCharacter = substr($string, 0, 1);
+		if($length > 7 && $length < 11 &&  $firstCharacter == "2") {
 			$ok = true;
 		}
 		if($ok) {
@@ -86,14 +96,13 @@ JS;
 
 	function dataValue() {
 		$string = $this->cleanInput($this->value);
-		$this->value = "+64".$this->value;
+		//$this->value = "+64".$this->value;
 		return $this->value;
 	}
 
 
-	function cleanInput($v) {
+	function cleanInput($string) {
 		$string = str_replace("+64", "", $string);
-		$string = str_replace("+", "", $string);
 		$string = preg_replace('/\D/', '', $string);
 		$string = intval($string);
 		return $string."";
