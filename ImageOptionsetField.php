@@ -2,6 +2,10 @@
 
 class ImageOptionsetField extends OptionsetField {
 
+	protected static $number_per_row = 1;
+		function set_number_per_row($v) { self::$number_per_row = $v;}
+		function get_number_per_row() { return self::$number_per_row;}
+
 	protected $objects = null;
 
 	protected $imageFieldName = null;
@@ -24,8 +28,8 @@ class ImageOptionsetField extends OptionsetField {
 
 	function Field() {
 		$options = '';
-		$odd = 0;
 		$source = $this->getSource();
+		$count = 0;
 		if($this->objects) {
 			foreach($this->objects as $obj) {
 				$key = $obj->ID;
@@ -44,16 +48,24 @@ class ImageOptionsetField extends OptionsetField {
 				if($key == $this->value/* || $useValue */) {
 					$useValue = false;
 					$checked = " checked=\"checked\"";
-				} else {
+				}
+				else {
 					$checked="";
 				}
-
-				$odd = ($odd + 1) % 2;
+				$odd = ($count + 1) % 2;
 				$extraClass = $odd ? "odd" : "even";
+				$firstInRow = "";
+				$lastInRow = "";
+				$position = " pos".$count;
+				if(self::$number_per_row > 1) {
+					if(!(($count) % self::$number_per_row)) {$firstInRow = " firstInRow";}
+					if(!(($count + 1) % self::$number_per_row)) {$lastInRow = " lastInRow";}
+				}
+
 				$extraClass .= " val" . preg_replace('/[^a-zA-Z0-9\-\_]/','_', $key);
 				$disabled = $this->disabled ? 'disabled="disabled"' : '';
-
-				$options .= "<li class=\"".$extraClass."\"><input id=\"$itemID\" name=\"$this->name\" type=\"radio\" value=\"$key\"$checked $disabled class=\"radio\" /> <label for=\"$itemID\">$labelHTML</label></li>\n";
+				$options .= "<li class=\"".$extraClass.$firstInRow.$lastInRow.$position."\"><input id=\"$itemID\" name=\"$this->name\" type=\"radio\" value=\"$key\"$checked $disabled class=\"radio\" /> <label for=\"$itemID\">$labelHTML</label></li>\n";
+				$count++;
 			}
 			$id = $this->id();
 		}

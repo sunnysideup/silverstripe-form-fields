@@ -3,8 +3,8 @@
 class NZCityField extends DropdownField {
 
 
-	function __construct($name, $title = null) {
-		parent::__construct($name, $title = null, $this->cityList(), $value = "", $form = null, $emptyString = "Select a city");
+	function __construct($name, $title = null, $value = "", $form = null, $emptyString = "") {
+		parent::__construct($name, $title, $this->cityList(), $value, $form, $emptyString);
 	}
 
 	protected function cityList() {
