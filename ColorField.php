@@ -4,7 +4,7 @@ class ColorField extends TextField {
 
 	function __construct($name, $title = null, $value = '#000000') {
 		parent::__construct($name, $title, $value);
-		//Requirements::javascript('formfieldsextra/javascript/jquery/jquery-1.3.2.min.js');
+		Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
 		Requirements::javascript('formfieldsextra/javascript/jquery/farbtastic.js');
 		Requirements::javascript('formfieldsextra/javascript/jquery/colorfield.js');
 		Requirements::css('formfieldsextra/css/ColorField.css');
