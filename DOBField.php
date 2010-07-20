@@ -4,7 +4,7 @@
  *
  **/
 
-class DOBField extends CalendarDateField {
+class DOBField extends DateField {
 
 	protected $minimumAgeInYears = 5;
 
