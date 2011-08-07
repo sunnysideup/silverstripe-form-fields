@@ -2,18 +2,22 @@
 
 class ColorField extends TextField {
 
+	protected static $source_file_location = "mysite/thirdparty/formfields/color/";
+		public static function get_source_file_location() {return self::$source_file_location;}
+		public static function get_source_file_location($s) {self::$source_file_location = $s;}
+
 	function __construct($name, $title = null, $value = '#000000') {
 		parent::__construct($name, $title, $value);
 		Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
-		Requirements::javascript('formfieldsextra/javascript/jquery/farbtastic.js');
-		Requirements::javascript('formfieldsextra/javascript/jquery/colorfield.js');
-		Requirements::css('formfieldsextra/css/ColorField.css');
-		Requirements::css('formfieldsextra/css/farbtastic.css');//echo $this->value;
+		Requirements::javascript(self::get_source_file_location().'farbtastic.js');
+		Requirements::javascript(self::get_source_file_location().'colorfield.js');
+		Requirements::css(self::get_source_file_location().'ColorField.css');
+		Requirements::css(self::get_source_file_location().'farbtastic.css');//echo $this->value;
 	}
 
 	function Field() {
 		$field = parent::Field();
-		$field .= '<img src="formfieldsextra/images/colorfield/color-icon.png" class="coloricon"/><div class="colorpopup"></div>';
+		$field .= '<img src="'.self::get_source_file_location().'color-icon.png" class="coloricon"/><div class="colorpopup"></div>';
 		return $field;
 	}
 }

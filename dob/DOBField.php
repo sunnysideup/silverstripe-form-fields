@@ -6,6 +6,11 @@
 
 class DOBField extends DateField {
 
+
+	protected static $source_file_location = "mysite/thirdparty/formfields/dob/";
+		public static function get_source_file_location() {return self::$source_file_location;}
+		public static function get_source_file_location($s) {self::$source_file_location = $s;}	
+
 	protected $minimumAgeInYears = 5;
 
 	protected $maximumAgeInYears  = 150;
@@ -47,7 +52,7 @@ class DOBField extends DateField {
 		$tabIndex1 = $this->getTabIndexHTML(1);
 		$tabIndex2 = $this->getTabIndexHTML(2);
 
-		Requirements::javascript("formfieldsextra/javascript/DOBField.js");
+		Requirements::javascript(self::get_source_file_location()."DOBField.js");
 		return <<<HTML
 			<div class="dobfield">
 				<span class="littleDOBLabel">day: </span><input type="text" id="$id-day" class="day numeric" name="{$fieldName}[Day]" value="$day" maxlength="2"$tabIndex0 />

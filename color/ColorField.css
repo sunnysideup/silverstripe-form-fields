@@ -1,0 +1,21 @@
+.typography div.color {
+	overflow: visible;	
+}
+
+form div.color .middleColumn {
+	position: relative;
+}
+form div.color .middleColumn img.coloricon {
+	position: relative;
+	top: 4px;
+	left: 4px;
+	cursor: pointer;
+}
+
+form div.color .colorpopup {
+	position: absolute;
+	top: -2px;
+	left: 282px;
+	display: none;
+	z-index: 2;
+}
