@@ -4,7 +4,7 @@ class ColorField extends TextField {
 
 	protected static $source_file_location = "mysite/thirdparty/formfields/color/";
 		public static function get_source_file_location() {return self::$source_file_location;}
-		public static function get_source_file_location($s) {self::$source_file_location = $s;}
+		public static function set_source_file_location($s) {self::$source_file_location = $s;}
 
 	function __construct($name, $title = null, $value = '#000000') {
 		parent::__construct($name, $title, $value);
