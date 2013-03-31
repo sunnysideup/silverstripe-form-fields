@@ -3,8 +3,8 @@
 class ImageOptionsetField extends OptionsetField {
 
 	protected static $number_per_row = 1;
-		function set_number_per_row($v) { self::$number_per_row = $v;}
-		function get_number_per_row() { return self::$number_per_row;}
+		static function set_number_per_row($v) { self::$number_per_row = $v;}
+		static function get_number_per_row() { return self::$number_per_row;}
 
 	protected $objects = null;
 
@@ -73,5 +73,3 @@ class ImageOptionsetField extends OptionsetField {
 	}
 
 }
-
-?>
