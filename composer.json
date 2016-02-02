@@ -14,7 +14,7 @@
 		}
 	],
 	"require":{
-		"silverstripe/framework": "*",
+		"silverstripe/framework": "*"
 	},
 	"extra": {
 		"installer-name": "form-fields"
