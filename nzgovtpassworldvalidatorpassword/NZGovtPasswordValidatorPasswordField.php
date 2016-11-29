@@ -5,12 +5,12 @@
  * @package forms
  * @subpackage fields-formattedinput
  */
-class NZGovtPasswordValidatorPasswordField extends PasswordField {
-
-
-	function jsValidation() {
-		$formID = $this->form->FormName();
-		$jsFunc =<<<JS
+class NZGovtPasswordValidatorPasswordField extends PasswordField
+{
+    public function jsValidation()
+    {
+        $formID = $this->form->FormName();
+        $jsFunc =<<<JS
 Behaviour.register({
 	"#$formID": {
 		validateNZGovtPasswordValidatorPasswordField: function(fieldName) {
@@ -58,9 +58,9 @@ Behaviour.register({
 });
 JS;
 
-		Requirements::customScript($jsFunc, 'func_validateNZGovtPasswordValidatorPasswordField');
+        Requirements::customScript($jsFunc, 'func_validateNZGovtPasswordValidatorPasswordField');
 
-		return <<<JS
+        return <<<JS
 if(typeof fromAnOnBlur != 'undefined'){
 	if(fromAnOnBlur.name == '$this->name')
 		$('$formID').validateNZGovtPasswordValidatorPasswordField('$this->name');
@@ -68,31 +68,28 @@ if(typeof fromAnOnBlur != 'undefined'){
 	$('$formID').validateNZGovtPasswordValidatorPasswordField('$this->name');
 }
 JS;
-	}
+    }
 
-	/** PHP Validation **/
-	function validate($validator){
-		$string = $this->value;
-		$validator = new NZGovtPasswordValidator();
-		$member = Member::currentMember();
-		if(!$member){
-			$member = new Member();
-			$member->ID = 0;
-		}
-		$outcome = $validator->validate($string, $member);
-		if($outcome->valid()) {
-			return true;
-		}
-		else {
- 			$validator->validationError(
- 				$this->name,
-				"There is a problem with your password: it needs to contain at least seven characters including at least one uppercase, lowercase, digit and one punctuation character (e.g. Hu#9iowD is a valid password and Abababaa is not).",
-				"validation"
-			);
-			return false;
-		}
-	}
-
+    /** PHP Validation **/
+    public function validate($validator)
+    {
+        $string = $this->value;
+        $validator = new NZGovtPasswordValidator();
+        $member = Member::currentMember();
+        if (!$member) {
+            $member = new Member();
+            $member->ID = 0;
+        }
+        $outcome = $validator->validate($string, $member);
+        if ($outcome->valid()) {
+            return true;
+        } else {
+            $validator->validationError(
+                $this->name,
+                "There is a problem with your password: it needs to contain at least seven characters including at least one uppercase, lowercase, digit and one punctuation character (e.g. Hu#9iowD is a valid password and Abababaa is not).",
+                "validation"
+            );
+            return false;
+        }
+    }
 }
-
-

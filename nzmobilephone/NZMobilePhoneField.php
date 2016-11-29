@@ -5,12 +5,12 @@
  * @package forms
  * @subpackage fields-formattedinput
  */
-class NZMobilePhoneField extends TextField {
-
-
-	function jsValidation() {
-		$formID = $this->form->FormName();
-		$jsFunc =<<<JS
+class NZMobilePhoneField extends TextField
+{
+    public function jsValidation()
+    {
+        $formID = $this->form->FormName();
+        $jsFunc =<<<JS
 Behaviour.register({
 	"#$formID": {
 		validateNZMobilePhoneField: function(fieldName) {
@@ -57,9 +57,9 @@ Behaviour.register({
 });
 JS;
 
-		Requirements::customScript($jsFunc, 'func_validateNZMobilePhoneField');
+        Requirements::customScript($jsFunc, 'func_validateNZMobilePhoneField');
 
-		return <<<JS
+        return <<<JS
 if(typeof fromAnOnBlur != 'undefined'){
 	if(fromAnOnBlur.name == '$this->name')
 		$('$formID').validateNZMobilePhoneField('$this->name');
@@ -67,47 +67,46 @@ if(typeof fromAnOnBlur != 'undefined'){
 	$('$formID').validateNZMobilePhoneField('$this->name');
 }
 JS;
-	}
+    }
 
-	/** PHP Validation **/
-	function validate($validator){
-		$ok = false;
-		$string = $this->cleanInput($this->value);
-		if(!trim($string)) {
-			return true;
-		}
-		$length = strlen($string);
-		$firstCharacter = substr($string, 0, 1);
-		if($length > 7 && $length < 11 &&  $firstCharacter == "2") {
-			$ok = true;
-		}
-		if($ok) {
-			return true;
-		}
-		else {
- 			$validator->validationError(
- 				$this->name,
-				"There is a problem with your New Zealand phone number - it should have a format like this 021123456.",
-				"validation"
-			);
-			return false;
-		}
-	}
+    /** PHP Validation **/
+    public function validate($validator)
+    {
+        $ok = false;
+        $string = $this->cleanInput($this->value);
+        if (!trim($string)) {
+            return true;
+        }
+        $length = strlen($string);
+        $firstCharacter = substr($string, 0, 1);
+        if ($length > 7 && $length < 11 &&  $firstCharacter == "2") {
+            $ok = true;
+        }
+        if ($ok) {
+            return true;
+        } else {
+            $validator->validationError(
+                $this->name,
+                "There is a problem with your New Zealand phone number - it should have a format like this 021123456.",
+                "validation"
+            );
+            return false;
+        }
+    }
 
-	function dataValue() {
-		$string = $this->cleanInput($this->value);
-		//$this->value = "+64".$this->value;
-		return $this->value;
-	}
+    public function dataValue()
+    {
+        $string = $this->cleanInput($this->value);
+        //$this->value = "+64".$this->value;
+        return $this->value;
+    }
 
 
-	function cleanInput($string) {
-		$string = str_replace("+64", "", $string);
-		$string = preg_replace('/\D/', '', $string);
-		$string = intval($string);
-		return $string."";
-	}
-
+    public function cleanInput($string)
+    {
+        $string = str_replace("+64", "", $string);
+        $string = preg_replace('/\D/', '', $string);
+        $string = intval($string);
+        return $string."";
+    }
 }
-
-

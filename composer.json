@@ -3,6 +3,9 @@
     "type": "silverstripe-module",
     "description": "Random collection of useful form fields",
     "keywords": [
+        "Silverstripe-CMS",
+        "CMS",
+        "Silverstripe",
         "form",
         "fields",
         "form fields"
@@ -16,7 +19,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "*"
+        "silverstripe/framework": "~3.1",
+        "silverstripe/cms": "~3.1"
     },
     "extra": {
         "installer-name": "form-fields"
